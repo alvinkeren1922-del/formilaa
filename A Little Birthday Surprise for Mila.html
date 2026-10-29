@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A Little Birthday Surprise for Mila</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,500&family=Poppins:wght@300;400;500&display=swap">
+<style>
+:root{--baby:#BDE0FE;--sky:#89CFF0;--soft:#DCEEFF;--ice:#EDF7FF;--white:#fff;--navy:#263B5E;--silver:#D9E2F0;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;font-family:Poppins,system-ui,sans-serif;color:var(--navy);background:linear-gradient(180deg,var(--baby),var(--ice) 40%,var(--white));background-attachment:fixed;line-height:1.7;overflow-x:hidden}
+h1,h2,.serif{font-family:'Playfair Display',Georgia,serif;font-weight:500}
+section{min-height:100vh;padding:40px 20px;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+section.active{display:flex;animation:pg .9s ease-out}
+@keyframes pg{from{opacity:0;transform:translateY(20px)}}
+h2{font-size:clamp(1.8rem,6vw,2.8rem);margin:0 0 6px}
+.sub{opacity:.75;margin:0 0 28px;font-style:italic}
+.glass{background:rgba(255,255,255,.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.9);border-radius:24px;box-shadow:0 10px 40px rgba(38,59,94,.12)}
+.btn{font:500 1rem Poppins,sans-serif;color:#fff;background:linear-gradient(135deg,var(--sky),#5fb3e8);border:0;border-radius:999px;padding:14px 30px;cursor:pointer;box-shadow:0 8px 24px rgba(137,207,240,.6);transition:transform .2s}
+.btn:hover{transform:translateY(-2px) scale(1.03)}.btn:active{transform:scale(.97)}
+.btn.alt{background:#fff;color:var(--navy);box-shadow:0 6px 18px rgba(38,59,94,.15)}
+.btn:disabled{background:var(--silver);color:var(--navy);box-shadow:none;cursor:not-allowed;transform:none;opacity:.8}
+.next{margin-top:28px}
+.lock{font-size:.85rem;opacity:.75;margin:10px 0 0}
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:200}
+#bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.fl{position:absolute;bottom:-30px;animation:up linear infinite;opacity:0}
+@keyframes up{10%{opacity:.7}100%{transform:translateY(-110vh) rotate(40deg);opacity:0}}
+@keyframes tw{50%{opacity:.25}}
+main{position:relative;z-index:1}
+#intro{position:fixed;inset:0;z-index:150;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;background:linear-gradient(180deg,var(--baby),var(--ice) 60%,#fff);transition:opacity 1s,visibility 1s}
+#intro.gone{opacity:0;visibility:hidden}
+#intro small{letter-spacing:.3em;font-size:.75rem}
+#intro h1{font-size:clamp(2rem,8vw,3.6rem);margin:6px 0}
+.gift{position:relative;width:150px;height:150px;margin:20px 0 26px;cursor:pointer;animation:bob 3s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px)}}
+.gift .box{position:absolute;bottom:0;left:10px;right:10px;height:90px;background:var(--sky);border-radius:10px;box-shadow:0 12px 30px rgba(38,59,94,.2)}
+.gift .box::after,.gift .lid::after{content:"";position:absolute;left:50%;top:0;bottom:0;width:20px;margin-left:-10px;background:#fff}
+.gift .lid{position:absolute;left:0;right:0;bottom:84px;height:34px;background:#a5d8f7;border-radius:10px;transition:transform .8s cubic-bezier(.3,1.6,.5,1),opacity .8s;transform-origin:left bottom}
+.gift .lid::before{content:"🎀";position:absolute;top:-30px;left:50%;transform:translateX(-50%);font-size:2.2rem}
+.gift .glow{position:absolute;left:50%;top:40%;width:20px;height:20px;border-radius:50%;background:#fff;opacity:0}
+.gift.open{animation:none}.gift.open .lid{transform:translateY(-70px) rotate(-25deg);opacity:.8}
+.gift.open .glow{animation:burst 1.2s forwards}
+@keyframes burst{30%{opacity:1}100%{opacity:0;box-shadow:0 0 0 160px rgba(255,255,255,.9)}}
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;width:100%;max-width:520px;margin:20px 0}
+.cd div{padding:18px 4px;box-shadow:0 0 24px rgba(137,207,240,.7);border-color:var(--baby)}
+.cd b{display:block;font:500 clamp(1.6rem,7vw,2.6rem) 'Playfair Display',serif}
+.cd span{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;opacity:.7}
+.card{max-width:620px;padding:28px 24px;text-align:left;width:100%}
+#wish{white-space:pre-line;min-height:15em}
+.cursor::after{content:"|";animation:tw 1s infinite}
+.env{position:relative;width:min(300px,80vw);height:200px;margin:10px 0 24px;cursor:pointer}
+.env .back{position:absolute;inset:0;background:#fff;border-radius:14px;box-shadow:0 12px 30px rgba(38,59,94,.18);border:2px solid var(--baby)}
+.env .flap{position:absolute;left:0;right:0;top:0;height:110px;background:var(--soft);clip-path:polygon(0 0,100% 0,50% 100%);transition:transform .7s;transform-origin:top;z-index:3}
+.env .heart{position:absolute;left:50%;top:84px;transform:translateX(-50%);font-size:2rem;z-index:4;transition:opacity .4s}
+.env.open .flap{transform:rotateX(180deg);z-index:0}.env.open .heart{opacity:0}
+.paper{max-width:620px;width:100%;background:#fff;border-radius:18px;padding:30px 26px;margin-top:26px;text-align:left;box-shadow:0 14px 40px rgba(38,59,94,.15);border-top:6px solid var(--baby);display:none;animation:paper 1s ease-out}
+.paper.show{display:block}
+@keyframes paper{from{opacity:0;transform:translateY(40px) scaleY(.6)}}
+.paper p{margin:0 0 14px;opacity:0;animation:fi .8s forwards}
+@keyframes fi{to{opacity:1}}
+.cake{width:min(260px,70vw);margin:0 auto}
+.flame{transform-box:fill-box;transform-origin:50% 100%;animation:sw 1.4s ease-in-out infinite alternate;transition:opacity .4s}
+@keyframes sw{from{transform:rotate(-5deg)}to{transform:rotate(5deg)}}
+.out .flame{opacity:0;animation:none}
+.smoke{opacity:0}.out .smoke{animation:sm 2s ease-out}
+@keyframes sm{from{opacity:.8;transform:translateY(0)}to{opacity:0;transform:translateY(-40px)}}
+#yay{min-height:5em;opacity:0;transition:opacity 1s}#yay.show{opacity:1}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.paper p{opacity:1}}
+</style>
+</head>
+<body>
+<canvas id="fx"></canvas>
+<div id="bg"></div>
+
+<div id="intro">
+  <small>A LITTLE SURPRISE FOR YOU</small>
+  <h1 class="serif">Happy Birthday, Mila! ♡</h1>
+  <p>To someone special, on her special day.</p>
+  <div class="gift" id="gift"><div class="box"></div><div class="lid"></div><div class="glow"></div></div>
+  <button class="btn" id="openBtn">Open Your Surprise ♡</button>
+</div>
+
+<main>
+  <section id="home" class="active">
+    <h2 class="serif" id="cdt">Counting Down to Mila’s Special Day!</h2>
+    <p class="sub" id="cdsub">Something special is coming for you, Mila. 💙</p>
+    <div class="cd" id="cd">
+      <div class="glass"><b id="d">0</b><span>Days</span></div>
+      <div class="glass"><b id="h">0</b><span>Hours</span></div>
+      <div class="glass"><b id="m">0</b><span>Minutes</span></div>
+      <div class="glass"><b id="s">0</b><span>Seconds</span></div>
+    </div>
+    <h2 class="serif" id="hb" style="display:none"></h2>
+    <p id="mem" class="glass card" style="display:none"></p>
+    <button class="btn next" id="n1" disabled>🔒 Lanjut ♡</button>
+    <p class="lock" id="lockmsg">Kejutan berikutnya terbuka saat hari ulang tahunmu tiba, Mila. 💙</p>
+  </section>
+
+  <section id="wishes">
+    <h2 class="serif">Today Is Your Special Day, Mila! 💙</h2>
+    <p class="sub">A new chapter, another beautiful story.</p>
+    <div class="glass card"><div id="wish" class="cursor"></div></div>
+    <button class="btn next" data-next>Lanjut ♡</button>
+  </section>
+
+  <section id="letter">
+    <h2 class="serif">A Special Letter</h2>
+    <p class="sub">A little letter, written just for you, Mila.</p>
+    <div class="env" id="env"><div class="back"></div><div class="flap"></div><div class="heart">💙</div></div>
+    <button class="btn" id="letterBtn">Open My Letter ♡</button>
+    <div class="paper" id="paper"></div>
+    <button class="btn next" data-next id="nl" style="display:none">Lanjut ♡</button>
+  </section>
+
+  <section id="cake">
+    <h2 class="serif">Make A Wish, Mila! 🎂</h2>
+    <p class="sub">Close your eyes and make a wish.</p>
+    <svg class="cake" viewBox="0 0 260 280" aria-label="Kue ulang tahun">
+      <ellipse cx="130" cy="262" rx="120" ry="12" fill="#263B5E" opacity=".12"/>
+      <rect x="20" y="190" width="220" height="70" rx="18" fill="#BDE0FE"/>
+      <path d="M20 205q18 20 36 0t36 0 36 0 36 0 36 0 36 0v-6H20z" fill="#fff"/>
+      <rect x="55" y="130" width="150" height="62" rx="16" fill="#fff" stroke="#D9E2F0" stroke-width="2"/>
+      <path d="M55 146q15 16 30 0t30 0 30 0 30 0 30 0v-6H55z" fill="#89CFF0"/>
+      <rect x="88" y="80" width="84" height="52" rx="14" fill="#DCEEFF"/>
+      <path d="M88 95q10 14 21 0t21 0 21 0 21 0v-6H88z" fill="#fff"/>
+      <g fill="#89CFF0"><circle cx="40" cy="228" r="3"/><circle cx="90" cy="240" r="3"/><circle cx="150" cy="225" r="3"/><circle cx="205" cy="238" r="3"/><circle cx="110" cy="165" r="3"/><circle cx="165" cy="172" r="3"/></g>
+      <g id="candles">
+        <rect x="108" y="52" width="8" height="30" rx="3" fill="#fff" stroke="#89CFF0"/><rect x="126" y="48" width="8" height="34" rx="3" fill="#89CFF0"/><rect x="144" y="52" width="8" height="30" rx="3" fill="#fff" stroke="#89CFF0"/>
+        <g class="flame"><ellipse cx="112" cy="42" rx="5" ry="9" fill="#ffd77a"/></g><g class="flame" style="animation-delay:-.5s"><ellipse cx="130" cy="38" rx="5" ry="9" fill="#ffd77a"/></g><g class="flame" style="animation-delay:-.9s"><ellipse cx="148" cy="42" rx="5" ry="9" fill="#ffd77a"/></g>
+        <g class="smoke" fill="#D9E2F0"><circle cx="112" cy="36" r="5"/><circle cx="130" cy="32" r="6"/><circle cx="148" cy="36" r="5"/></g>
+      </g>
+    </svg>
+    <div id="yay" class="serif" style="margin:18px 0"></div>
+    <button class="btn" id="blow">Blow the Candles</button>
+    <button class="btn next" data-next id="nc" style="display:none">Lanjut ♡</button>
+  </section>
+
+  <section id="end">
+    <h2 class="serif">Once Again, Happy Birthday, Mila! 💙</h2>
+    <p style="max-width:520px">May your life be filled with beautiful memories, endless happiness, and wonderful surprises.</p>
+    <p>Thank you for being part of this little story.</p>
+    <p class="serif" style="font-size:1.2rem">Made with love by Apin, just for you. ♡</p>
+  </section>
+</main>
+
+<script>
+/* ===== KONFIGURASI — edit di sini ===== */
+const CONFIG={
+  fullName:"Zulhiyya Isna Kamila", nickname:"Mila", sender:"Apin",
+  birthday:"2026-10-31", // dihitung WIB (UTC+7)
+  wish:"Happy Birthday, Mila!\n\nHari ini adalah hari spesial untuk seseorang yang luar biasa. Semoga di umur yang baru ini, Mila selalu diberikan kesehatan, kebahagiaan, dan keberuntungan.\n\nSemoga semua impian dan hal yang sedang kamu perjuangkan bisa menjadi kenyataan. Semoga setiap langkahmu dipenuhi kemudahan dan setiap harimu memiliki alasan untuk tersenyum.\n\nKeep being yourself, Mila. You deserve all the beautiful things in this world.",
+  letter:[
+    "happy birthday ya, aku ga lupa kok, walaupun hubungan kita telah selesai, bukan berarti aku tidak mengucapkan selamat kepadamu. happy birthday, my once upon a happiness. maaf aku ga bisa ungkapin ini secara langsung aku tau sejarah kisah kasih kita udah selesai, tapi aku masih boleh ucapin kamu kan? then once again, happy birthday.",
+    "bahagia terus ya kamuuu semoga segala impian kamu bisa terwujud, semoga segala harapan kecil kebahagiaan kamu bisa jadi nyata. kamu kereeennn banget udah bisa sampe ke titik sejauh ini, aku bangga sama kamu.",
+    "maaf ya, mungkin aku belum bisa jadi seseorang yang bisa merakit terus senyum manis kamu selagi kita masih bersama. tapi aku harap kamu jauh lebih nyaman dengan kehidupan ka sekarang. stay safe, healthy, and happy. okay If ever you need somebody, aku akan selalu ada disini. aku ga bakal kemana-mana.",
+    "seperti biasanya setiap manusia bertambah usia dan beranjak dewasa aku mau doa yang terbaik meski mungkin versi terbaik dalam kamus kamu kita itu beda.",
+    "ada banyak semoga yang harus kamu aminkan, tapi yang pasti the best for u.",
+    "aku harap di umur kamu yang sekarang kamu bisa nentuin arah hidup kamu mau kemana, kurangin main malem nya ya? udah bukan anak kecil lagi kan? udah waktunya kamu mikirin masa depan kamu karna ga selamanya kamu bakal gitu terus.",
+    "semoga kedepannya kamu di permudah apapun yang mau kamu capai, and semoga kamu di kelilingin orang orang tulus yang sayang sama kamu. I hape this day will bring u lots of happiness and fun.",
+    "I’m so lucky to meet you, be a good girl."],
+  afterMessage:"Terima kasih sudah merayakan hari spesialmu bersama kejutan kecil ini, Mila. Semoga semua doa dan harapannya terus menemani langkahmu. 💙 — Apin"
+};
+/* ======================================= */
+const $=id=>document.getElementById(id);
+const RM=matchMedia("(prefers-reduced-motion:reduce)").matches;
+const small=innerWidth<700;
+
+/* confetti */
+const cv=$("fx"),cx=cv.getContext("2d");let P=[],run=false;
+function size(){cv.width=innerWidth;cv.height=innerHeight}size();addEventListener("resize",size);
+function confetti(n){
+  if(RM)return;n=small?Math.round(n*.55):n;
+  const cols=["#BDE0FE","#fff","#D9E2F0","#89CFF0","#263B5E"];
+  for(let i=0;i<n;i++)P.push({x:Math.random()*cv.width,y:-20-Math.random()*cv.height*.4,w:5+Math.random()*6,h:8+Math.random()*6,vx:Math.random()*2-1,vy:2+Math.random()*3,r:Math.random()*6,vr:Math.random()*.2-.1,c:cols[i%5]});
+  if(!run){run=true;requestAnimationFrame(tick)}
+}
+function tick(){
+  cx.clearRect(0,0,cv.width,cv.height);
+  P=P.filter(p=>p.y<cv.height+20);
+  for(const p of P){p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.strokeStyle="rgba(38,59,94,.15)";cx.fillRect(-p.w/2,-p.h/2,p.w,p.h);cx.strokeRect(-p.w/2,-p.h/2,p.w,p.h);cx.restore()}
+  if(P.length)requestAnimationFrame(tick);else{run=false;cx.clearRect(0,0,cv.width,cv.height)}
+}
+
+/* background floaters */
+if(!RM){const bg=$("bg"),sy=["✦","♡","✿","☁","✧","♡"];
+  for(let i=0;i<(small?10:16);i++){const e=document.createElement("span");e.className="fl";e.textContent=sy[i%6];
+    e.style.cssText=`left:${Math.random()*100}%;font-size:${12+Math.random()*16}px;color:${i%2?"#89CFF0":"#fff"};animation-duration:${14+Math.random()*14}s;animation-delay:${-Math.random()*20}s;text-shadow:0 0 8px #fff`;bg.appendChild(e)}}
+
+/* intro (hanya tampil sekali per perangkat) */
+let seen=false;try{seen=!!localStorage.getItem("mila-opened")}catch(e){}
+if(seen){$("intro").classList.add("gone")}else{document.body.style.overflow="hidden"}
+$("openBtn").onclick=$("gift").onclick=()=>{
+  $("gift").classList.add("open");confetti(120);
+  try{localStorage.setItem("mila-opened","1")}catch(e){}
+  setTimeout(()=>{$("intro").classList.add("gone");document.body.style.overflow=""},RM?100:1500);
+};
+
+/* countdown (WIB) */
+const start=new Date(CONFIG.birthday+"T00:00:00+07:00").getTime(),end=start+864e5;
+let shown=false;
+function pad(n){return String(n).padStart(2,"0")}
+function upd(){
+  const now=Date.now(),ok=now>=start;
+  $("n1").disabled=!ok;$("n1").textContent=ok?"Lanjut ♡":"🔒 Lanjut ♡";$("lockmsg").style.display=ok?"none":"block";
+  if(!ok){const t=start-now;
+    $("d").textContent=Math.floor(t/864e5);$("h").textContent=pad(Math.floor(t/36e5)%24);
+    $("m").textContent=pad(Math.floor(t/6e4)%60);$("s").textContent=pad(Math.floor(t/1e3)%60);return}
+  $("cd").style.display="none";$("cdsub").style.display="none";$("cdt").style.display="none";
+  if(now<end){$("hb").style.display="block";$("hb").textContent="HAPPY BIRTHDAY, MILA!";if(!shown){shown=true;confetti(80)}}
+  else{$("hb").style.display="none";$("mem").style.display="block";$("mem").textContent=CONFIG.afterMessage}
+}
+upd();setInterval(upd,1000);
+
+/* halaman per bagian */
+const order=["home","wishes","letter","cake","end"];let pi=0,typed=false;
+function type(){if(typed)return;typed=true;const el=$("wish");if(RM){el.textContent=CONFIG.wish;el.className="";return}
+  let i=0;(function s(){el.textContent=CONFIG.wish.slice(0,++i);if(i<CONFIG.wish.length)setTimeout(s,22);else el.className=""})()}
+function go(i){
+  if(i>=order.length||(i>0&&Date.now()<start))return;
+  pi=i;order.forEach((id,k)=>$(id).classList.toggle("active",k===i));scrollTo(0,0);
+  if(order[i]==="wishes")type();if(order[i]==="end")confetti(100);
+}
+$("n1").onclick=()=>go(1);
+document.querySelectorAll("[data-next]").forEach(b=>b.onclick=()=>go(pi+1));
+
+/* letter */
+let lopen=false;
+function toggleLetter(){
+  lopen=!lopen;$("env").classList.toggle("open",lopen);
+  const p=$("paper");
+  if(lopen){p.innerHTML=CONFIG.letter.map((t,i)=>`<p style="animation-delay:${RM?0:.5+i*.8}s">${t}</p>`).join("")+`<div style="text-align:center"><button class="btn alt" id="cl">Close Letter</button></div>`;
+    p.classList.add("show");$("cl").onclick=toggleLetter;$("letterBtn").textContent="Close Letter";$("nl").style.display="";confetti(70);
+    setTimeout(()=>p.scrollIntoView({behavior:RM?"auto":"smooth",block:"start"}),200)}
+  else{p.classList.remove("show");$("letterBtn").textContent="Open My Letter ♡"}
+}
+$("letterBtn").onclick=$("env").onclick=toggleLetter;
+
+/* cake */
+let lit=true;
+$("blow").onclick=()=>{
+  const c=$("candles"),y=$("yay");
+  if(lit){lit=false;c.classList.remove("out");void c.getBoundingClientRect();c.classList.add("out");confetti(130);
+    y.innerHTML="YAY! Your wish deserves to come true, Mila! 💙<br><small style='font-family:Poppins;opacity:.75'>May all your dreams come true.</small>";y.classList.add("show");$("blow").textContent="Light the Candles Again";$("nc").style.display=""}
+  else{lit=true;c.classList.remove("out");y.classList.remove("show");$("blow").textContent="Blow the Candles"}
+};
+</script>
+</body>
+</html>
